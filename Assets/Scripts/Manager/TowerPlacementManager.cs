@@ -33,12 +33,12 @@
         private DiContainer container;
         private Action placementFinalized;
 
-        public void StartPlacingTower(TowerType towerType,int cost,Action placementCallback)
+        public void StartPlacingTower(TowerType towerType, int cost, Action placementCallback)
         {
             if (isPlacing) return;
 
             placementFinalized = placementCallback;
-            currentTowerCost= cost;
+            currentTowerCost = cost;
             currentTowerType = towerType;
             GameObject towerPrefab = towers[towerType].towerPrefab;
             currentTowerSilhouette = container.InstantiatePrefab(towerPrefab);
@@ -50,6 +50,37 @@
             }
 
             isPlacing = true;
+        }
+
+        private void Start()
+        {
+            if (gameData.mortarSetCount > 0)
+            {
+                currentTowerType = TowerType.Mortar;
+                foreach (int tower in gameData.filledMortarTowerSlots)
+                {
+                    PlaceTower(mapController.TowerElements[tower], true);
+                }
+            }
+            
+            if (gameData.turretSetCount > 0)
+            {
+                currentTowerType = TowerType.Turret;
+                foreach (int tower in gameData.filledTurretTowerSlots)
+                {
+                    PlaceTower(mapController.TowerElements[tower], true);
+                }
+            }
+           
+            if (gameData.mineSetCount > 0)
+            {
+                currentTowerType = TowerType.Mine;
+                foreach (int mine in gameData.activeMineSlots)
+                {
+                    PlaceTower(mapController.PathElements[mine], true);
+                }
+            }
+
         }
 
         private void Update()
@@ -93,25 +124,22 @@
                     }
                 }
                 currentTowerSilhouette.transform.position = hit.point;
-                UpdateSilhouetteMaterial(isValidPlacement);
+                UpdateSilhouetteMaterial(isValidPlacement && !hit.transform.parent.GetComponent<TileElement>().isFilled);
 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (isValidPlacement)
+                    if (isValidPlacement && !hit.transform.parent.GetComponent<TileElement>().isFilled)
                     {
                         PlaceTower(hit.transform.parent.GetComponent<TileElement>());
                         placementFinalized?.Invoke();
                     }
                     else { CancelPlacement(); }
-                    Debug.Log("Mouse Up");
                 }
 
             }
             if (Input.GetMouseButtonUp(0))
             {
                 CancelPlacement();
-                Debug.Log("Mouse Up2");
-
             }
 
         }
@@ -125,42 +153,57 @@
             }
         }
 
-        private void PlaceTower(TileElement selectedTile)
+        private void PlaceTower(TileElement selectedTile, bool placeWithInitializer = false)
         {
+            if (selectedTile.isFilled)
+                return;
+
+            selectedTile.isFilled = true;
             Vector3 position = selectedTile.transform.position;
-           
+
             GameObject newTower = container.InstantiatePrefab(towers[currentTowerType].towerPrefab, position, Quaternion.identity, null);
-            newTower.transform.rotation = Quaternion.Euler(-90,0, 0);
-            var tower = newTower.GetComponent<Tower>(); 
+            newTower.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            var tower = newTower.GetComponent<Tower>();
 
             tower.SetGameData(gameData);
 
             switch (currentTowerType)
             {
                 case TowerType.Turret:
-                    (tower as TurretTower).towerSlotIndex= mapController.TowerElements.IndexOf(selectedTile);
-                    gameData.emptyTowerSlots.Remove((tower as TurretTower).towerSlotIndex);
-                    gameData.filledTowerSlots.Add((tower as TurretTower).towerSlotIndex,currentTowerType);
-                    gameData.turretSetCount++;
+                    (tower as TurretTower).towerSlotIndex = mapController.TowerElements.IndexOf(selectedTile);
+                    if (!placeWithInitializer)
+                    {
+                        gameData.emptyTowerSlots.Remove((tower as TurretTower).towerSlotIndex);
+                        gameData.filledTurretTowerSlots.Add((tower as TurretTower).towerSlotIndex);
+                        gameData.turretSetCount++;
+                    }
                     break;
                 case TowerType.Mortar:
                     (tower as MortarTower).towerSlotIndex = mapController.TowerElements.IndexOf(selectedTile);
-                    gameData.emptyTowerSlots.Remove((tower as MortarTower).towerSlotIndex);
-                    gameData.filledTowerSlots.Add((tower as MortarTower).towerSlotIndex, currentTowerType);
-                    gameData.mortarSetCount++;
+                    if (!placeWithInitializer)
+                    {
+                        gameData.emptyTowerSlots.Remove((tower as MortarTower).towerSlotIndex);
+                        gameData.filledMortarTowerSlots.Add((tower as MortarTower).towerSlotIndex);
+                        gameData.mortarSetCount++;
+                    }
                     break;
                 case TowerType.Mine:
                     (tower as MineTower).pathIndex = mapController.PathElements.IndexOf(selectedTile);
                     tower.SetVfxData(vfxData);
-                    gameData.mineSetCount++;  
-                    gameData.activeMineSlots.Add((tower as MineTower).pathIndex);
+                    if (!placeWithInitializer)
+                    {
+                        gameData.mineSetCount++;
+                        gameData.activeMineSlots.Add((tower as MineTower).pathIndex);
+                    }
                     break;
                 default:
                     break;
             }
-
-            gameData.SpendMoney(currentTowerCost);
-            CancelPlacement();
+            if (!placeWithInitializer)
+            {
+                gameData.SpendMoney(currentTowerCost);
+                CancelPlacement();
+            }
         }
 
         private void CancelPlacement()

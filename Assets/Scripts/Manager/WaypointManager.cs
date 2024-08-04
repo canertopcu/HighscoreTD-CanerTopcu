@@ -7,8 +7,7 @@ public class WaypointManager : MonoBehaviour
     [Inject]
     MapController mapController;
 
-    public List<Transform> waypoints = new List<Transform>();
-    public string Name="Hello";
+    public List<Transform> waypoints = new List<Transform>(); 
     private void Start()
     {
         foreach (var item in mapController.PathElements)

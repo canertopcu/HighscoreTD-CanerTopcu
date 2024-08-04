@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Core.Enums;
-using AYellowpaper.SerializedCollections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.ScriptableObjects
@@ -9,7 +7,8 @@ namespace Assets.Scripts.ScriptableObjects
     [CreateAssetMenu(fileName = "GameData", menuName = "GameData")]
     public class GameDataSO : ScriptableObject
     {
-        public SerializedDictionary<int, TowerType> filledTowerSlots;
+        public List<int> filledTurretTowerSlots = new();
+        public List<int> filledMortarTowerSlots = new();
         public int mineSetCount = 0;
         public int turretSetCount = 0;
         public int mortarSetCount = 0;
@@ -23,12 +22,14 @@ namespace Assets.Scripts.ScriptableObjects
 
         public void HitDamageMainTower(int damage)
         {
-            if(mainTowerHealth-damage>0){
+            if (mainTowerHealth - damage > 0)
+            {
                 mainTowerHealth -= damage;
             }
-            else{
+            else
+            {
                 mainTowerHealth = 0;
-            } 
+            }
         }
 
         internal void SpendMoney(int cost)
@@ -41,7 +42,8 @@ namespace Assets.Scripts.ScriptableObjects
         {
             playerGold = 1000;
             playerScore = 0;
-            filledTowerSlots.Clear();
+            filledMortarTowerSlots.Clear();
+            filledTurretTowerSlots.Clear();
             emptyTowerSlots.Clear();
             for (int i = 0; i < 12; i++)
             {
