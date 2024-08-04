@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8057813ed365740a725fe98b06c93a, type: 3}
+  m_Name: Mine
+  m_EditorClassIdentifier: 
+  towerName: Mine
+  towerType: 2
+  baseCost: 50
+  costMultiplier: 1.1
+  attackDamage: 50
+  attackRange: 0
+  attackDelay: 0
+  isAreaDamage: 0
+  placingType: 1
+  towerPrefab: {fileID: 1980267722559770964, guid: abaec07b10113254faaef633ae22cfef,
+    type: 3}
+  uiSprite: {fileID: 0}
+  explosionPrefab: {fileID: 0}
+  explosionRadius: 0
+  triggerRadius: 0

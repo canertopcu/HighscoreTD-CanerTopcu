@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d51b08f4c389d4478e9fa9025071b56, type: 3}
+  m_Name: TileSystem
+  m_EditorClassIdentifier: 
+  tilePrefabs:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 7519149068376983193, guid: 2a8b1a9c51984044a8fee12a343d4e84,
+        type: 3}
+    - Key: 1
+      Value: {fileID: 2361135166925085510, guid: 75abc85afe14598428ae2a41befc93e8,
+        type: 3}
+    - Key: 2
+      Value: {fileID: 3766365483655668264, guid: 13d50de43c1836042993b4a4ba5b7754,
+        type: 3}
+    - Key: 3
+      Value: {fileID: 6889447297972627876, guid: aafd8e23b4732434b993907e23a61687,
+        type: 3}
+    - Key: 4
+      Value: {fileID: 3766365483655668264, guid: 6701841371e32224f99ddfc483d7a0f3,
+        type: 3}
+    - Key: 6
+      Value: {fileID: 3766365483655668264, guid: 9f9e1dbec68eabd4ca38d540b85ac40e,
+        type: 3}
+    - Key: 5
+      Value: {fileID: 3766365483655668264, guid: f1432d632ecb06740914dd33af4d59cc,
+        type: 3}
