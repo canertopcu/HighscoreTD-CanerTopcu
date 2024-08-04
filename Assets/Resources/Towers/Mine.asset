@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Mine
   towerType: 2
-  baseCost: 50
+  baseCost: 25
   costMultiplier: 1.1
   attackDamage: 50
   attackRange: 0

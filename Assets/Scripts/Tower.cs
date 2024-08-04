@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class Tower:MonoBehaviour
+    public class Tower : MonoBehaviour
     {
-        public int cost;
+        protected GameDataSO gameData;
+        protected VfxDataSO vfxData;
+
+        internal void SetGameData(GameDataSO gameData)
+        {
+            this.gameData = gameData;
+        }
+
+        internal void SetVfxData(VfxDataSO vfxData)
+        {
+            this.vfxData = vfxData;
+        }
     }
 }

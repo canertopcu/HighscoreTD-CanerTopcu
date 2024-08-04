@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Turret
   towerType: 0
-  baseCost: 25
+  baseCost: 50
   costMultiplier: 1.3
   attackDamage: 10
   attackRange: 100

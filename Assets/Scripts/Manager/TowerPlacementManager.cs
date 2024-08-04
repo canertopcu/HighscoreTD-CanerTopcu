@@ -3,6 +3,7 @@
     using Assets.Scripts.Core.Enums;
     using Assets.Scripts.ScriptableObjects;
     using AYellowpaper.SerializedCollections;
+    using System;
     using UnityEngine;
     using Zenject;
 
@@ -10,6 +11,14 @@
     {
         [Inject]
         private GameDataSO gameData;
+
+        [Inject]
+        private VfxDataSO vfxData;
+
+        [Inject]
+        MapController mapController;
+
+
 
         public SerializedDictionary<TowerType, TowerSO> towers;
         public Material validPlacementMaterial;
@@ -22,11 +31,13 @@
 
         [Inject]
         private DiContainer container;
+        private Action placementFinalized;
 
-
-        public void StartPlacingTower(TowerType towerType,int cost)
+        public void StartPlacingTower(TowerType towerType,int cost,Action placementCallback)
         {
             if (isPlacing) return;
+
+            placementFinalized = placementCallback;
             currentTowerCost= cost;
             currentTowerType = towerType;
             GameObject towerPrefab = towers[towerType].towerPrefab;
@@ -88,7 +99,8 @@
                 {
                     if (isValidPlacement)
                     {
-                        PlaceTower(hit.transform.parent.position);
+                        PlaceTower(hit.transform.parent.GetComponent<TileElement>());
+                        placementFinalized?.Invoke();
                     }
                     else { CancelPlacement(); }
                     Debug.Log("Mouse Up");
@@ -113,11 +125,40 @@
             }
         }
 
-        private void PlaceTower(Vector3 position)
+        private void PlaceTower(TileElement selectedTile)
         {
+            Vector3 position = selectedTile.transform.position;
+           
             GameObject newTower = container.InstantiatePrefab(towers[currentTowerType].towerPrefab, position, Quaternion.identity, null);
             newTower.transform.rotation = Quaternion.Euler(-90,0, 0);
-            newTower.GetComponent<Tower>().cost = currentTowerCost;
+            var tower = newTower.GetComponent<Tower>(); 
+
+            tower.SetGameData(gameData);
+
+            switch (currentTowerType)
+            {
+                case TowerType.Turret:
+                    (tower as TurretTower).towerSlotIndex= mapController.TowerElements.IndexOf(selectedTile);
+                    gameData.emptyTowerSlots.Remove((tower as TurretTower).towerSlotIndex);
+                    gameData.filledTowerSlots.Add((tower as TurretTower).towerSlotIndex,currentTowerType);
+                    gameData.turretSetCount++;
+                    break;
+                case TowerType.Mortar:
+                    (tower as MortarTower).towerSlotIndex = mapController.TowerElements.IndexOf(selectedTile);
+                    gameData.emptyTowerSlots.Remove((tower as MortarTower).towerSlotIndex);
+                    gameData.filledTowerSlots.Add((tower as MortarTower).towerSlotIndex, currentTowerType);
+                    gameData.mortarSetCount++;
+                    break;
+                case TowerType.Mine:
+                    (tower as MineTower).pathIndex = mapController.PathElements.IndexOf(selectedTile);
+                    tower.SetVfxData(vfxData);
+                    gameData.mineSetCount++;  
+                    gameData.activeMineSlots.Add((tower as MineTower).pathIndex);
+                    break;
+                default:
+                    break;
+            }
+
             gameData.SpendMoney(currentTowerCost);
             CancelPlacement();
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TileElement : MonoBehaviour
 {
-    [SerializeField] private TileType _tileType;
+    [SerializeField] private TileType _tileType; 
     private TileSO _tileSO;
     GameObject tileVisualObject;
     public int x, y;

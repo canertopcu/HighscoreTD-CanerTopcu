@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filledTowerSlots:
     _serializedList: []
+  mineSetCount: 1
+  turretSetCount: 0
+  mortarSetCount: 0
+  activeMineSlots: 06000000
   emptyTowerSlots: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
-  playerGold: 100
+  playerGold: 975
   playerScore: 0
+  mainTowerHealth: 0
+  mainTowerMaxHP: 100
