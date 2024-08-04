@@ -10,6 +10,8 @@ public class TileElement : MonoBehaviour
     GameObject tileVisualObject;
     public int x, y;
 
+    public TileType TileType => _tileType;
+
     public void Set(TileSO tileSO, TileType tileType, int x, int y)
     {
 #if UNITY_EDITOR

@@ -17,7 +17,16 @@ namespace Assets.Scripts
         //private Button button;
         private EventTrigger eventTrigger;
 
-        private GameDataSO gameData;
+        private GameDataSO _gameData;
+        private GameDataSO gameData {
+            get { 
+                if(_gameData == null)
+                {
+                    _gameData = Resources.Load<GameDataSO>("Data/GameData");
+                }
+                return _gameData;
+            }
+        }
 
         [Inject]
         private TowerPlacementManager towerPlacementManager;
@@ -26,15 +35,19 @@ namespace Assets.Scripts
         public GameObject blockImage;
 
         private void Start()
-        {
-            gameData = Resources.Load<GameDataSO>("Data/GameData");
+        { 
             eventTrigger= GetComponent<EventTrigger>();
             var entry = new EventTrigger.Entry {eventID = EventTriggerType.PointerDown};
-            entry.callback.AddListener((data) => { OnClick(); });
+            entry.callback.AddListener((data) => { OnPointerDown(); });
             eventTrigger.triggers.Add(entry);
 
              
             priceText.text = cost.ToString();
+        }
+
+        private void OnDisable()
+        {
+            eventTrigger.triggers.Clear();
         }
 
         private void Update()
@@ -43,10 +56,16 @@ namespace Assets.Scripts
             eventTrigger.enabled = gameData.playerGold >= cost; 
         }
 
-        private void OnClick()
+        private void OnPointerDown()
         {
             Debug.Log(towerType+" Clicked");
-            towerPlacementManager.StartPlacingTower(towerType);
+            towerPlacementManager.StartPlacingTower(towerType,cost);
+        }
+
+        public void SetCost(int cost)
+        {
+            this.cost = cost;
+            priceText.text = cost.ToString();
         }
     }
 }

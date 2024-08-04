@@ -1122,7 +1122,7 @@ GameObject:
   - component: {fileID: 176995437}
   - component: {fileID: 176995438}
   m_Layer: 0
-  m_Name: Tile_3_8
+  m_Name: Tile_3_8(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1362,7 +1362,7 @@ GameObject:
   - component: {fileID: 201767309}
   - component: {fileID: 201767310}
   m_Layer: 0
-  m_Name: Tile_7_7
+  m_Name: Tile_7_7(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1679,7 +1679,7 @@ GameObject:
   - component: {fileID: 238416326}
   - component: {fileID: 238416327}
   m_Layer: 0
-  m_Name: Tile_7_9
+  m_Name: Tile_7_9(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1773,7 +1773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 247052961}
-  - component: {fileID: 247052960}
+  - component: {fileID: 247052962}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1781,24 +1781,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &247052960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247052959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eccfe2173e65974ba0027af6e9d36a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 11
-  height: 20
-  tileSize: 2
-  tileElement: {fileID: 5972861022486274912, guid: 17807889ba18f3d46952b10d14bba2b9,
-    type: 3}
-  tileSO: {fileID: 11400000, guid: 15387d7c9e909f1488d9201cd26ce719, type: 2}
 --- !u!4 &247052961
 Transform:
   m_ObjectHideFlags: 0
@@ -2034,6 +2016,44 @@ Transform:
   - {fileID: 1495754623}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &247052962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247052959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877d62719b28029469ba6dc44fdcffe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PathElements:
+  - {fileID: 1833593085}
+  - {fileID: 1971564678}
+  - {fileID: 2108406532}
+  - {fileID: 1194125386}
+  - {fileID: 1718605786}
+  - {fileID: 675552409}
+  - {fileID: 1204792907}
+  - {fileID: 1894396174}
+  - {fileID: 943643518}
+  - {fileID: 2010322683}
+  TowerElements:
+  - {fileID: 933644786}
+  - {fileID: 176995438}
+  - {fileID: 968203040}
+  - {fileID: 1004427816}
+  - {fileID: 1292763968}
+  - {fileID: 1566431984}
+  - {fileID: 201767310}
+  - {fileID: 2118005964}
+  - {fileID: 238416327}
+  - {fileID: 1107748255}
+  - {fileID: 851972187}
+  - {fileID: 1417973752}
+  Spawner: {fileID: 1292153780}
+  MainTower: {fileID: 1439456221}
 --- !u!1 &284812942
 GameObject:
   m_ObjectHideFlags: 0
@@ -3999,7 +4019,7 @@ GameObject:
   - component: {fileID: 675552408}
   - component: {fileID: 675552409}
   m_Layer: 0
-  m_Name: Tile_5_10
+  m_Name: Tile_5_10(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4411,7 +4431,7 @@ GameObject:
   - component: {fileID: 851972186}
   - component: {fileID: 851972187}
   m_Layer: 0
-  m_Name: Tile_7_11
+  m_Name: Tile_7_11(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4919,7 +4939,7 @@ GameObject:
   - component: {fileID: 933644785}
   - component: {fileID: 933644786}
   m_Layer: 0
-  m_Name: Tile_3_7
+  m_Name: Tile_3_7(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5015,7 +5035,7 @@ GameObject:
   - component: {fileID: 943643517}
   - component: {fileID: 943643518}
   m_Layer: 0
-  m_Name: Tile_5_13
+  m_Name: Tile_5_13(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5159,7 +5179,7 @@ GameObject:
   - component: {fileID: 968203039}
   - component: {fileID: 968203040}
   m_Layer: 0
-  m_Name: Tile_3_9
+  m_Name: Tile_3_9(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5533,7 +5553,7 @@ GameObject:
   - component: {fileID: 1004427815}
   - component: {fileID: 1004427816}
   m_Layer: 0
-  m_Name: Tile_3_10
+  m_Name: Tile_3_10(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5965,7 +5985,7 @@ GameObject:
   - component: {fileID: 1107748254}
   - component: {fileID: 1107748255}
   m_Layer: 0
-  m_Name: Tile_7_10
+  m_Name: Tile_7_10(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6472,7 +6492,7 @@ GameObject:
   - component: {fileID: 1194125385}
   - component: {fileID: 1194125386}
   m_Layer: 0
-  m_Name: Tile_5_8
+  m_Name: Tile_5_8(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6712,7 +6732,7 @@ GameObject:
   - component: {fileID: 1204792906}
   - component: {fileID: 1204792907}
   m_Layer: 0
-  m_Name: Tile_5_11
+  m_Name: Tile_5_11(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7358,7 +7378,7 @@ GameObject:
   - component: {fileID: 1292153779}
   - component: {fileID: 1292153780}
   m_Layer: 0
-  m_Name: Tile_5_4
+  m_Name: Tile_5_4(Spawner)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7406,7 +7426,7 @@ GameObject:
   - component: {fileID: 1292763967}
   - component: {fileID: 1292763968}
   m_Layer: 0
-  m_Name: Tile_3_11
+  m_Name: Tile_3_11(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8216,7 +8236,7 @@ GameObject:
   - component: {fileID: 1417973751}
   - component: {fileID: 1417973752}
   m_Layer: 0
-  m_Name: Tile_7_12
+  m_Name: Tile_7_12(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8408,7 +8428,7 @@ GameObject:
   - component: {fileID: 1439456220}
   - component: {fileID: 1439456221}
   m_Layer: 0
-  m_Name: Tile_5_15
+  m_Name: Tile_5_15(MainTower)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9176,7 +9196,7 @@ GameObject:
   - component: {fileID: 1566431983}
   - component: {fileID: 1566431984}
   m_Layer: 0
-  m_Name: Tile_3_12
+  m_Name: Tile_3_12(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9941,7 +9961,7 @@ GameObject:
   - component: {fileID: 1718605785}
   - component: {fileID: 1718605786}
   m_Layer: 0
-  m_Name: Tile_5_9
+  m_Name: Tile_5_9(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10735,7 +10755,7 @@ GameObject:
   - component: {fileID: 1833593084}
   - component: {fileID: 1833593085}
   m_Layer: 0
-  m_Name: Tile_5_5
+  m_Name: Tile_5_5(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11167,7 +11187,7 @@ GameObject:
   - component: {fileID: 1894396173}
   - component: {fileID: 1894396174}
   m_Layer: 0
-  m_Name: Tile_5_12
+  m_Name: Tile_5_12(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11721,7 +11741,7 @@ GameObject:
   - component: {fileID: 1971564677}
   - component: {fileID: 1971564678}
   m_Layer: 0
-  m_Name: Tile_5_6
+  m_Name: Tile_5_6(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12201,7 +12221,7 @@ GameObject:
   - component: {fileID: 2010322682}
   - component: {fileID: 2010322683}
   m_Layer: 0
-  m_Name: Tile_5_14
+  m_Name: Tile_5_14(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12585,7 +12605,7 @@ GameObject:
   - component: {fileID: 2108406531}
   - component: {fileID: 2108406532}
   m_Layer: 0
-  m_Name: Tile_5_7
+  m_Name: Tile_5_7(Path)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12729,7 +12749,7 @@ GameObject:
   - component: {fileID: 2118005963}
   - component: {fileID: 2118005964}
   m_Layer: 0
-  m_Name: Tile_7_8
+  m_Name: Tile_7_8(TowerPlace)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
