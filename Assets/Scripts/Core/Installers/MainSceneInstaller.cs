@@ -15,16 +15,19 @@ namespace Assets.Scripts.Core.Installers
 
         public GameObject bulletPrefab;
         public GameObject missilePrefab;
-        public GameObject enemyPrefab;
+        public EnemySO normalEnemy;
+        public EnemySO tinyEnemy;
+        public EnemySO giantEnemy;
         public override void InstallBindings()
-        {
-            //Container.Bind<GameManager>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();  
+        { 
             Container.Bind<IGameManager>().To<GameManager>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
 
             SignalBusInstaller.Install(Container);
 
             Container.DeclareSignal<GoldEarnedSignal>();
+            Container.DeclareSignal<GameStateChangedSignal>();
 
+            Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle().NonLazy();
             Container.Bind<PlayerController>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
             Container.Bind<GoldEarnedChecker>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
 
@@ -46,12 +49,20 @@ namespace Assets.Scripts.Core.Installers
               .FromComponentInNewPrefab(missilePrefab)
               .UnderTransformGroup("Missles");
 
-            Container.BindMemoryPool<EnemyController, EnemyMemoryPool>()
+            Container.BindMemoryPool<EnemyController, NormalEnemyMemoryPool>()
                 .WithInitialSize(10)
-                .FromComponentInNewPrefab(enemyPrefab) 
-                .UnderTransformGroup("Enemies");
+                .FromComponentInNewPrefab(normalEnemy.enemyPrefab)
+                .UnderTransformGroup("Enemies1");
+            Container.BindMemoryPool<EnemyController, TinyEnemyMemoryPool>()
+              .WithInitialSize(10)
+              .FromComponentInNewPrefab(tinyEnemy.enemyPrefab)
+              .UnderTransformGroup("Enemies2");
+            Container.BindMemoryPool<EnemyController, GiantEnemyMemoryPool>()
+              .WithInitialSize(10)
+              .FromComponentInNewPrefab(giantEnemy.enemyPrefab)
+              .UnderTransformGroup("Enemies3");
 
-             
+
 
 
 

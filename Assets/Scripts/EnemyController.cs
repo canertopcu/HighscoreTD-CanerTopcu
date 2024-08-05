@@ -1,3 +1,4 @@
+using Assets.Scripts.Core.Interfaces;
 using Assets.Scripts.ScriptableObjects;
 using System;
 using System.Collections;
@@ -8,7 +9,6 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
 {
     IMemoryPool _pool;
 
-
     WaypointManager waypointManager;
     GameDataSO gameData;
 
@@ -18,6 +18,16 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
     public int damage = 10;
 
     public bool isDanced = false;
+
+
+    private IGameManager _gameManager;
+
+    [Inject]
+    private void Construct(IGameManager gameManager)
+    {
+        _gameManager = gameManager;
+    }
+
     private Animator _animator;
     private Animator animator
     {
@@ -30,6 +40,8 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
             return _animator;
         }
     }
+
+
 
     public void OnSpawned(IMemoryPool pool)
     {
@@ -63,7 +75,7 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
 
     private void Update()
     {
-        if (isStarted && gameData.mainTowerHealth>0)
+        if (isStarted && gameData.mainTowerHealth > 0)
         {
             var nextPoint = waypointManager.GetNextPoint(selectedPoint);
             transform.position = Vector3.MoveTowards(transform.position, nextPoint.position, Time.deltaTime);
@@ -81,12 +93,13 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
             }
         }
 
-        if (isStarted && gameData.mainTowerHealth == 0 && !isDanced) { 
-            isDanced= true;
+        if (isStarted && gameData.mainTowerHealth == 0 && !isDanced)
+        {
+            isDanced = true;
             animator.SetBool("Walking", false);
             animator.SetBool("Running", false);
             animator.SetTrigger("Dancing");
-            animator.SetFloat("DancingSpeed", UnityEngine.Random.Range(0.3f,2f));
+            animator.SetFloat("DancingSpeed", UnityEngine.Random.Range(0.3f, 2f));
         }
     }
 
@@ -96,6 +109,11 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
         animator.SetBool("Running", false);
         animator.SetTrigger("Jump");
         gameData.HitDamageMainTower(damage);
+
+        if (gameData.mainTowerHealth == 0)
+        {
+            _gameManager.EndGame();
+        }
         yield return new WaitForSeconds(1.5f);
         Dispose();
     }

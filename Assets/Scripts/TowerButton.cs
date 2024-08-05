@@ -30,11 +30,9 @@ namespace Assets.Scripts
             eventTrigger = GetComponent<EventTrigger>();
             var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
             entry.callback.AddListener((data) => { OnPointerDown(); });
-            eventTrigger.triggers.Add(entry);
+            eventTrigger.triggers.Add(entry); 
 
-           
             UpdateCost();
-            
         }
 
 

@@ -1,6 +1,7 @@
 ﻿namespace Assets.Scripts.Manager
 {
     using Assets.Scripts.Core.Enums;
+    using Assets.Scripts.Core.Interfaces;
     using Assets.Scripts.ScriptableObjects;
     using AYellowpaper.SerializedCollections;
     using System;
@@ -18,7 +19,8 @@
         [Inject]
         MapController mapController;
 
-
+        [Inject]
+        IGameManager gameManager;
 
         public SerializedDictionary<TowerType, TowerSO> towers;
         public Material validPlacementMaterial;
@@ -62,7 +64,7 @@
                     PlaceTower(mapController.TowerElements[tower], true);
                 }
             }
-            
+
             if (gameData.turretSetCount > 0)
             {
                 currentTowerType = TowerType.Turret;
@@ -71,7 +73,7 @@
                     PlaceTower(mapController.TowerElements[tower], true);
                 }
             }
-           
+
             if (gameData.mineSetCount > 0)
             {
                 currentTowerType = TowerType.Mine;
@@ -203,6 +205,10 @@
             {
                 gameData.SpendMoney(currentTowerCost);
                 CancelPlacement();
+            }
+            if (!gameManager.IsGameStarted())
+            {
+                gameManager.StartGame();
             }
         }
 
