@@ -17,6 +17,7 @@ MonoBehaviour:
   baseCost: 100
   costMultiplier: 1.5
   attackDamage: 10
+  attackMultiplier: 1.03
   attackRange: 300
   attackDelay: 100
   isAreaDamage: 0

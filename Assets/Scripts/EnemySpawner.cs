@@ -59,6 +59,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 case 0:
                     enemy = _normalEnemyPool.Spawn();
+                    
                     break;
                 case 1:
                     enemy = _tinyEnemyPool.Spawn();
@@ -71,8 +72,7 @@ public class EnemySpawner : MonoBehaviour
                     break;
             }
 
-            //var enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity).GetComponent<EnemyController>();
-            enemy.Setup(waypointManager, gameData);
+            //var enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity).GetComponent<EnemyController>(); 
             enemy.StartMovement();
             yield return new WaitForSeconds(spawnRate);
         }

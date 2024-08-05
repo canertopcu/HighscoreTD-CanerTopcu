@@ -15,7 +15,11 @@ MonoBehaviour:
   enemyName: NormalEnemy
   enemyTypeType: 1
   Hp: 15
-  hpMultiplier: 1.05
+  hpMultiplier: 1.2
+  goldReward: 35
+  goldRewardMultiplier: 1.1
+  scoreReward: 80
+  scoreRewardMultiplier: 1.5
   attackDamage: 10
   enemyPrefab: {fileID: 6121331421021493585, guid: 7c05e8fff992257429a76fc549b9ac6b,
     type: 3}

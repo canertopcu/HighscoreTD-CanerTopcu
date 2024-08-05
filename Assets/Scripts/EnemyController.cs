@@ -8,24 +8,24 @@ using Zenject;
 public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
 {
     IMemoryPool _pool;
-
-    WaypointManager waypointManager;
-    GameDataSO gameData;
+    public EnemySO enemyData;
+    WaypointManager _waypointManager;
+    GameDataSO _gameData;
 
     bool isStarted = false;
     Transform selectedPoint;
-    public int health = 10;
-    public int damage = 10;
 
     public bool isDanced = false;
-
+    public int health = 100;
 
     private IGameManager _gameManager;
 
     [Inject]
-    private void Construct(IGameManager gameManager)
+    private void Construct(IGameManager gameManager, WaypointManager waypointManager, GameDataSO gameData)
     {
         _gameManager = gameManager;
+        _gameData = gameData;
+        _waypointManager = waypointManager;
     }
 
     private Animator _animator;
@@ -46,6 +46,8 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
     public void OnSpawned(IMemoryPool pool)
     {
         _pool = pool;
+        health = (int)(enemyData.Hp * Mathf.Pow(enemyData.hpMultiplier, _gameData.gameLevel));
+
         // Initialization logic here
     }
 
@@ -68,23 +70,23 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
     internal void StartMovement()
     {
         isStarted = true;
-        selectedPoint = waypointManager.GetFirstPoint();
+        selectedPoint = _waypointManager.GetFirstPoint();
         transform.position = selectedPoint.position;
-        transform.LookAt(waypointManager.GetNextPoint(selectedPoint), Vector3.up);
+        transform.LookAt(_waypointManager.GetNextPoint(selectedPoint), Vector3.up);
     }
 
     private void Update()
     {
-        if (isStarted && gameData.mainTowerHealth > 0)
+        if (isStarted && _gameData.mainTowerHealth > 0)
         {
-            var nextPoint = waypointManager.GetNextPoint(selectedPoint);
+            var nextPoint = _waypointManager.GetNextPoint(selectedPoint);
             transform.position = Vector3.MoveTowards(transform.position, nextPoint.position, Time.deltaTime);
             transform.LookAt(nextPoint, Vector3.up);
 
             if (Vector3.Distance(transform.position, nextPoint.position) < 0.1f)
             {
                 selectedPoint = nextPoint;
-                if (waypointManager.GetNextPoint(selectedPoint) == null)
+                if (_waypointManager.GetNextPoint(selectedPoint) == null)
                 {
                     isStarted = false;
                     Debug.Log("Enemy reached the end");
@@ -93,7 +95,7 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
             }
         }
 
-        if (isStarted && gameData.mainTowerHealth == 0 && !isDanced)
+        if (isStarted && _gameData.mainTowerHealth == 0 && !isDanced)
         {
             isDanced = true;
             animator.SetBool("Walking", false);
@@ -108,9 +110,9 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
         animator.SetBool("Walking", false);
         animator.SetBool("Running", false);
         animator.SetTrigger("Jump");
-        gameData.HitDamageMainTower(damage);
+        _gameData.HitDamageMainTower(enemyData.attackDamage);
 
-        if (gameData.mainTowerHealth == 0)
+        if (_gameData.mainTowerHealth == 0)
         {
             _gameManager.EndGame();
         }
@@ -118,9 +120,40 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
         Dispose();
     }
 
-    internal void Setup(WaypointManager waypointManager, GameDataSO gameData)
+    private void OnTriggerEnter(Collider other)
     {
-        this.gameData = gameData;
-        this.waypointManager = waypointManager;
+
+    }
+
+    internal void TakeDamage(float attackDamage)
+    {
+        health -= (int)attackDamage;
+        if (health <= 0)
+        {
+            health = 0;
+            animator.SetBool("Walking", false);
+            animator.SetBool("Running", false);
+
+            if (UnityEngine.Random.Range(0, 2) == 0)
+            {
+                animator.SetTrigger("Hit1");
+            }
+            else
+            {
+                animator.SetTrigger("Hit2");
+            }
+
+            _gameData.AddMoney(enemyData.goldReward, enemyData.goldRewardMultiplier);
+            _gameData.AddScore(enemyData.scoreReward, enemyData.scoreRewardMultiplier);
+
+            isStarted = false;
+            StartCoroutine(KillSlowly());
+        }
+    }
+
+    IEnumerator KillSlowly()
+    {
+        yield return new WaitForSeconds(2f);
+        Die();
     }
 }

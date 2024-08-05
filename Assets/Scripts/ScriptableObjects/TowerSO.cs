@@ -15,6 +15,7 @@ namespace Assets.Scripts.ScriptableObjects
 
         [Header("Attack Properties")]
         public float attackDamage;
+        public float attackMultiplier;
         public float attackRange;
         public float attackDelay;
         public bool isAreaDamage;

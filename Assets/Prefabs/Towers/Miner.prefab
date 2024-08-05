@@ -101,6 +101,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5325907580499239873}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d36438343718287419e198200fc987f7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3302426091274215267}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d36438343718287419e198200fc987f7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6717770982556361194}
   m_SourcePrefab: {fileID: 100100000, guid: d36438343718287419e198200fc987f7, type: 3}
 --- !u!1 &1980267722559770964 stripped
 GameObject:
@@ -120,4 +128,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e022e09ce603554a966ee44cd74eb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isExploded: 0
   pathIndex: -1
+  towerData: {fileID: 11400000, guid: 0e311f99538611f48a09824d7b724e70, type: 2}
+  enemies: []
+--- !u!135 &3302426091274215267
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980267722559770964}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.026772093
+  m_Center: {x: 0, y: -1.1462693e-16, z: 0.0103246765}
+--- !u!54 &6717770982556361194
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980267722559770964}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

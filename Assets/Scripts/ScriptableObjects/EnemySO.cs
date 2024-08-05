@@ -10,11 +10,15 @@ namespace Assets.Scripts.ScriptableObjects
         [Header("Basic Info")]
         public string enemyName;
         public EnemyType enemyTypeType;
-        public float Hp;
+        public int Hp;
         public float hpMultiplier;
+        public int goldReward;
+        public float goldRewardMultiplier;
+        public int scoreReward;
+        public float scoreRewardMultiplier;
 
         [Header("Attack Properties")]
-        public float attackDamage; 
+        public int attackDamage; 
 
         [Header("Visuals")]
         public GameObject enemyPrefab;

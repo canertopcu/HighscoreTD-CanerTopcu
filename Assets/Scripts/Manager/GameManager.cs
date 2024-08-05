@@ -52,6 +52,11 @@ namespace Assets.Scripts.Manager
 
         private void Update()
         {
+            if (isGameStarted)
+            {
+                gameDataSO.elapsedTime += Time.deltaTime;
+                gameDataSO.gameLevel = (int)(gameDataSO.elapsedTime / gameDataSO.incrementTimer); 
+            }
         }
     }
 }

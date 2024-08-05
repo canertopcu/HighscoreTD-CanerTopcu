@@ -16,7 +16,8 @@ MonoBehaviour:
   towerType: 2
   baseCost: 25
   costMultiplier: 1.1
-  attackDamage: 50
+  attackDamage: 30
+  attackMultiplier: 1.1
   attackRange: 0
   attackDelay: 0
   isAreaDamage: 0

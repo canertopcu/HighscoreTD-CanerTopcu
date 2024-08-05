@@ -166,7 +166,7 @@
             GameObject newTower = container.InstantiatePrefab(towers[currentTowerType].towerPrefab, position, Quaternion.identity, null);
             newTower.transform.rotation = Quaternion.Euler(-90, 0, 0);
             var tower = newTower.GetComponent<Tower>();
-
+            tower.SetSelectedTileElement(selectedTile);
             tower.SetGameData(gameData);
 
             switch (currentTowerType)
@@ -191,6 +191,7 @@
                     break;
                 case TowerType.Mine:
                     (tower as MineTower).pathIndex = mapController.PathElements.IndexOf(selectedTile);
+                    (tower as MineTower).towerData = towers[currentTowerType];
                     tower.SetVfxData(vfxData);
                     if (!placeWithInitializer)
                     {
