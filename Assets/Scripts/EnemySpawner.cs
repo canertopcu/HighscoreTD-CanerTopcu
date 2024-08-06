@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
 {
     NormalEnemyMemoryPool _normalEnemyPool;
     TinyEnemyMemoryPool _tinyEnemyPool;
-    GiantEnemyMemoryPool _giantEnemyPool; 
+    GiantEnemyMemoryPool _giantEnemyPool;
 
     [Inject] GameDataSO gameData;
 
@@ -36,16 +36,25 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _signalBus.Subscribe<GameStateChangedSignal>(OnGameStateChanged);
+        _signalBus.Subscribe<GameStateChangedSignal>(OnGameStateChanged); 
+        _signalBus.Subscribe<LevelSignal>(OnLevelChanged); 
     }
+
+    private void OnLevelChanged(LevelSignal levelSignal)
+    { 
+        spawnRate = Mathf.Clamp(5f - (levelSignal.Level * 0.02f),1f,5f);
+    }
+
     private void OnDisable()
     {
         _signalBus.Unsubscribe<GameStateChangedSignal>(OnGameStateChanged);
+        _signalBus.Unsubscribe<LevelSignal>(OnLevelChanged);
     }
 
     private void OnGameStateChanged(GameStateChangedSignal stateKeeper)
     {
         isStarted = stateKeeper.State;
+        spawnRate = Mathf.Clamp(5f - (gameData.gameLevel * 0.02f), 1f, 5f); ;
     }
 
     IEnumerator SpawnEnemy()
@@ -59,7 +68,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 case 0:
                     enemy = _normalEnemyPool.Spawn();
-                    
+
                     break;
                 case 1:
                     enemy = _tinyEnemyPool.Spawn();

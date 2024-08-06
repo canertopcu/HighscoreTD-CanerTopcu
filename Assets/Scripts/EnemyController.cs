@@ -1,4 +1,5 @@
 using Assets.Scripts.Core.Interfaces;
+using Assets.Scripts.Core.Signals;
 using Assets.Scripts.ScriptableObjects;
 using System;
 using System.Collections;
@@ -19,13 +20,15 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
     public int health = 100;
 
     private IGameManager _gameManager;
-
+    private SignalBus _signalBus;
+ 
     [Inject]
-    private void Construct(IGameManager gameManager, WaypointManager waypointManager, GameDataSO gameData)
+    private void Construct(IGameManager gameManager, WaypointManager waypointManager, GameDataSO gameData,SignalBus signalBus)
     {
         _gameManager = gameManager;
         _gameData = gameData;
         _waypointManager = waypointManager;
+        _signalBus = signalBus;
     }
 
     private Animator _animator;
@@ -64,6 +67,8 @@ public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposabl
     private void Die()
     {
         // Logic for enemy death
+        _gameData.AddKillCount();
+        _signalBus.Fire(new EnemyKillSignal());
         Dispose();
     }
 

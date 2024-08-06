@@ -24,12 +24,11 @@ namespace Assets.Scripts.Core.Installers
 
             SignalBusInstaller.Install(Container);
 
-            Container.DeclareSignal<GoldEarnedSignal>();
+            Container.DeclareSignal<LevelSignal>();
+            Container.DeclareSignal<EnemyKillSignal>();
             Container.DeclareSignal<GameStateChangedSignal>();
 
-            Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle().NonLazy();
-            Container.Bind<PlayerController>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
-            Container.Bind<GoldEarnedChecker>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
+            Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle().NonLazy(); 
 
             Container.Bind<GameDataSO>().FromScriptableObject(gameDataItem).AsSingle();
             Container.Bind<VfxDataSO>().FromScriptableObject(vfxDataItem).AsSingle();

@@ -22,6 +22,13 @@ namespace Assets.Scripts.ScriptableObjects
         public int gameLevel = 0;
         public float elapsedTime = 0;
         public float incrementTimer = 60;
+
+        public int KillCount { get; private set; }
+
+        public void AddKillCount()
+        {
+            KillCount++;
+        }
         public void HitDamageMainTower(int damage)
         {
             if (mainTowerHealth - damage > 0)
@@ -39,9 +46,9 @@ namespace Assets.Scripts.ScriptableObjects
             playerGold -= cost;
         }
 
-        internal void AddMoney(int reward,float multiply)
+        internal void AddMoney(int reward, float multiply)
         {
-            playerGold += (int)(reward * Mathf.Pow(multiply,gameLevel));
+            playerGold += (int)(reward * Mathf.Pow(multiply, gameLevel));
         }
 
         public void AddScore(int score, float multiply)

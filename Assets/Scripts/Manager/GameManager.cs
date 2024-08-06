@@ -3,6 +3,7 @@ using Assets.Scripts.Core.Signals;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
 using Zenject;
+using Zenject.ReflectionBaking.Mono.Cecil;
 namespace Assets.Scripts.Manager
 {
     public class GameManager : MonoBehaviour, IGameManager
@@ -18,7 +19,7 @@ namespace Assets.Scripts.Manager
         {
             _signalBus = signalBus;
         }
-
+         
         private void Start()
         {
             if (gameDataSO.mainTowerHealth == 0)
@@ -55,7 +56,12 @@ namespace Assets.Scripts.Manager
             if (isGameStarted)
             {
                 gameDataSO.elapsedTime += Time.deltaTime;
-                gameDataSO.gameLevel = (int)(gameDataSO.elapsedTime / gameDataSO.incrementTimer); 
+                var calculatedLevel = (int)(gameDataSO.elapsedTime / gameDataSO.incrementTimer);
+                if (calculatedLevel != gameDataSO.gameLevel)
+                {
+                    gameDataSO.gameLevel = calculatedLevel;
+                    _signalBus.Fire(new LevelSignal(gameDataSO.gameLevel));
+                } 
             }
         }
     }
