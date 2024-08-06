@@ -27,12 +27,14 @@ namespace Assets.Scripts.Core.Installers
             Container.DeclareSignal<LevelSignal>();
             Container.DeclareSignal<EnemyKillSignal>();
             Container.DeclareSignal<GameStateChangedSignal>();
+            Container.DeclareSignal<BoosterSignal>();
 
             Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle().NonLazy(); 
 
             Container.Bind<GameDataSO>().FromScriptableObject(gameDataItem).AsSingle();
             Container.Bind<VfxDataSO>().FromScriptableObject(vfxDataItem).AsSingle();
 
+            Container.Bind<EnemyManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<TowerPlacementManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<WaypointManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<MapController>().FromComponentInHierarchy().AsSingle();

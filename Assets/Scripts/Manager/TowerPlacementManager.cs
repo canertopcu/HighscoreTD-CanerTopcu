@@ -173,6 +173,7 @@
             {
                 case TowerType.Turret:
                     (tower as TurretTower).towerSlotIndex = mapController.TowerElements.IndexOf(selectedTile);
+                    (tower as TurretTower).towerData = towers[currentTowerType];
                     if (!placeWithInitializer)
                     {
                         gameData.emptyTowerSlots.Remove((tower as TurretTower).towerSlotIndex);
@@ -182,6 +183,7 @@
                     break;
                 case TowerType.Mortar:
                     (tower as MortarTower).towerSlotIndex = mapController.TowerElements.IndexOf(selectedTile);
+                    (tower as MortarTower).towerData = towers[currentTowerType];
                     if (!placeWithInitializer)
                     {
                         gameData.emptyTowerSlots.Remove((tower as MortarTower).towerSlotIndex);
@@ -191,8 +193,7 @@
                     break;
                 case TowerType.Mine:
                     (tower as MineTower).pathIndex = mapController.PathElements.IndexOf(selectedTile);
-                    (tower as MineTower).towerData = towers[currentTowerType];
-                    tower.SetVfxData(vfxData);
+                    (tower as MineTower).towerData = towers[currentTowerType]; 
                     if (!placeWithInitializer)
                     {
                         gameData.mineSetCount++;

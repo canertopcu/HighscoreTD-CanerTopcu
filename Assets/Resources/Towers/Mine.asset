@@ -16,6 +16,7 @@ MonoBehaviour:
   towerType: 2
   baseCost: 25
   costMultiplier: 1.01
+  coolDown: 0
   attackDamage: 30
   attackMultiplier: 1.1
   attackRange: 0
@@ -24,7 +25,4 @@ MonoBehaviour:
   placingType: 1
   towerPrefab: {fileID: 1980267722559770964, guid: abaec07b10113254faaef633ae22cfef,
     type: 3}
-  uiSprite: {fileID: 0}
-  explosionPrefab: {fileID: 0}
-  explosionRadius: 0
-  triggerRadius: 0
+  explosionPrefab: {fileID: 154950, guid: f407b02e7947b9143969a306aee2b85c, type: 3}

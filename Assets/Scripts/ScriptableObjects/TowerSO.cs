@@ -13,6 +13,8 @@ namespace Assets.Scripts.ScriptableObjects
         public int baseCost;
         public float costMultiplier;
 
+        public float coolDown=0;
+
         [Header("Attack Properties")]
         public float attackDamage;
         public float attackMultiplier;
@@ -24,15 +26,11 @@ namespace Assets.Scripts.ScriptableObjects
 
         [EnumFlags]
         public PlacingType placingType;
-
-
+         
         [Header("Visuals")]
-        public GameObject towerPrefab;
-        public Sprite uiSprite;
+        public GameObject towerPrefab; 
         public GameObject explosionPrefab;
 
-        [Header("Special Properties")]
-        public float explosionRadius;  
-        public float triggerRadius;  
+  
     }
 }

@@ -65,6 +65,7 @@ public class BoosterUIController : MonoBehaviour
 
     IEnumerator BoosterCoolDown()
     {
+        _signalBus.Fire(new BoosterSignal(true));
         while (0 < boosterCoolDownTime)
         {
             boosterCoolDown.color=Color.red;
@@ -75,5 +76,7 @@ public class BoosterUIController : MonoBehaviour
         boosterCoolDown.color = Color.green;
         boosterCoolDown.fillAmount = 0;
         button.interactable = false;
+        _signalBus.Fire(new BoosterSignal(false));
+
     }
 }

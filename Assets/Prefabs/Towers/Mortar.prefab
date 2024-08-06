@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b1c19973a6930174885071a65c3c654f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.095327
+      value: 14.014176
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b1c19973a6930174885071a65c3c654f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23
+      value: 0.20921421
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b1c19973a6930174885071a65c3c654f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.793901
+      value: 17.974869
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b1c19973a6930174885071a65c3c654f,
         type: 3}
@@ -87,6 +87,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5358909794682191429}
   m_SourcePrefab: {fileID: 100100000, guid: b1c19973a6930174885071a65c3c654f, type: 3}
+--- !u!4 &360712768124800534 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -683118806850594375, guid: b1c19973a6930174885071a65c3c654f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8323937756024592303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9171009550550297342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b1c19973a6930174885071a65c3c654f,
@@ -106,3 +112,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerSlotIndex: -1
+  muzzle: {fileID: 360712768124800534}
+  target: {fileID: 0}
