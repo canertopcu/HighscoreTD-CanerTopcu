@@ -1,13 +1,15 @@
-﻿namespace Assets.Scripts.Manager
+﻿
+using Assets.Scripts.Core.Enums;
+using Assets.Scripts.Core.Interfaces;
+using Assets.Scripts.Map;
+using Assets.Scripts.ScriptableObjects;
+using Assets.Scripts.Towers;
+using AYellowpaper.SerializedCollections;
+using System;
+using UnityEngine;
+using Zenject;
+namespace Assets.Scripts.Manager
 {
-    using Assets.Scripts.Core.Enums;
-    using Assets.Scripts.Core.Interfaces;
-    using Assets.Scripts.ScriptableObjects;
-    using AYellowpaper.SerializedCollections;
-    using System;
-    using UnityEngine;
-    using Zenject;
-
     public class TowerPlacementManager : MonoBehaviour
     {
         [Inject]
@@ -193,7 +195,7 @@
                     break;
                 case TowerType.Mine:
                     (tower as MineTower).pathIndex = mapController.PathElements.IndexOf(selectedTile);
-                    (tower as MineTower).towerData = towers[currentTowerType]; 
+                    (tower as MineTower).towerData = towers[currentTowerType];
                     if (!placeWithInitializer)
                     {
                         gameData.mineSetCount++;

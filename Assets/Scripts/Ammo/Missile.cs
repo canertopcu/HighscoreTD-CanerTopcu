@@ -1,12 +1,12 @@
-﻿using Assets.Scripts.ScriptableObjects;
+﻿using Assets.Scripts.Enemy;
+using Assets.Scripts.ScriptableObjects;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 using Zenject;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Ammo
 {
     public class Missile : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
     {
@@ -34,7 +34,7 @@ namespace Assets.Scripts
         }
 
         [ContextMenu("Move Projectile")]
-        public void MoveProjectile(Vector3 targetPos, TowerSO towerData,GameDataSO gameData)
+        public void MoveProjectile(Vector3 targetPos, TowerSO towerData, GameDataSO gameData)
         {
             _gameData = gameData;
             _towerData = towerData;

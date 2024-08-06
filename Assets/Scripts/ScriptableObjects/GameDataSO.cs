@@ -59,7 +59,7 @@ namespace Assets.Scripts.ScriptableObjects
         [ContextMenu("ResetElements")]
         public void ResetElements()
         {
-            playerGold = 1000;
+            playerGold = 200;
             playerScore = 0;
             filledMortarTowerSlots.Clear();
             filledTurretTowerSlots.Clear();

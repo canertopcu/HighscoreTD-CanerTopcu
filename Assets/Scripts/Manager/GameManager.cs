@@ -3,45 +3,73 @@ using Assets.Scripts.Core.Signals;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
 using Zenject;
-using Zenject.ReflectionBaking.Mono.Cecil;
+
 namespace Assets.Scripts.Manager
 {
     public class GameManager : MonoBehaviour, IGameManager
     {
         private SignalBus _signalBus;
-
-        [Inject] GameDataSO gameDataSO;
-
-        [Inject] UIManager uiManager;
-
-        [Inject]
-        public void Construct(SignalBus signalBus)
-        {
-            _signalBus = signalBus;
-        }
-         
-        private void Start()
-        {
-            if (gameDataSO.mainTowerHealth == 0)
-                gameDataSO.ResetElements();
-        }
+        private GameDataSO _gameDataSO;
+        private UIManager _uiManager;
 
         public bool isGameStarted = false;
+
+        [Inject]
+        private void Construct(SignalBus signalBus, GameDataSO gameDataSO, UIManager uiManager)
+        {
+            _signalBus = signalBus;
+            _gameDataSO = gameDataSO;
+            _uiManager = uiManager;
+        }
+
+        private void Start()
+        {
+            if (_gameDataSO == null)
+            {
+                Debug.LogError("GameDataSO is not injected!");
+                return;
+            }
+
+            if (_uiManager == null)
+            {
+                Debug.LogError("UIManager is not injected!");
+                return;
+            }
+
+            if (_gameDataSO.mainTowerHealth == 0)
+            {
+                _gameDataSO.ResetElements();
+            }
+        }
+
         public void StartGame()
         {
+            if (_signalBus == null)
+            {
+                Debug.LogError("SignalBus is not injected!");
+                return;
+            }
+
             isGameStarted = true;
             _signalBus.Fire(new GameStateChangedSignal(isGameStarted));
         }
 
         public void EndGame()
         {
-            int highScore = PlayerPrefs.GetInt("HighScore", 0);
-            if (highScore < gameDataSO.playerScore)
+            if (_signalBus == null)
             {
-                PlayerPrefs.SetInt("HighScore", gameDataSO.playerScore);
-                highScore = gameDataSO.playerScore;
+                Debug.LogError("SignalBus is not injected!");
+                return;
             }
-            uiManager.ShowGameOverPanel(gameDataSO.playerScore, highScore);
+
+            int highScore = PlayerPrefs.GetInt("HighScore", 0);
+            if (highScore < _gameDataSO.playerScore)
+            {
+                PlayerPrefs.SetInt("HighScore", _gameDataSO.playerScore);
+                highScore = _gameDataSO.playerScore;
+            }
+
+            _uiManager.ShowGameOverPanel(_gameDataSO.playerScore, highScore);
             isGameStarted = false;
             _signalBus.Fire(new GameStateChangedSignal(isGameStarted));
         }
@@ -53,15 +81,15 @@ namespace Assets.Scripts.Manager
 
         private void Update()
         {
-            if (isGameStarted)
+            if (!isGameStarted)
+                return;
+
+            _gameDataSO.elapsedTime += Time.deltaTime;
+            var calculatedLevel = (int)(_gameDataSO.elapsedTime / _gameDataSO.incrementTimer);
+            if (calculatedLevel != _gameDataSO.gameLevel)
             {
-                gameDataSO.elapsedTime += Time.deltaTime;
-                var calculatedLevel = (int)(gameDataSO.elapsedTime / gameDataSO.incrementTimer);
-                if (calculatedLevel != gameDataSO.gameLevel)
-                {
-                    gameDataSO.gameLevel = calculatedLevel;
-                    _signalBus.Fire(new LevelSignal(gameDataSO.gameLevel));
-                } 
+                _gameDataSO.gameLevel = calculatedLevel;
+                _signalBus.Fire(new LevelSignal(_gameDataSO.gameLevel));
             }
         }
     }

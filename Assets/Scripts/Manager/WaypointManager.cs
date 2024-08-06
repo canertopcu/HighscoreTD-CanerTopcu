@@ -1,37 +1,40 @@
+using Assets.Scripts.Map;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-
-public class WaypointManager : MonoBehaviour
+namespace Assets.Scripts.Manager
 {
-    [Inject]
-    MapController mapController;
-
-    public List<Transform> waypoints = new List<Transform>(); 
-    private void Start()
+    public class WaypointManager : MonoBehaviour
     {
-        foreach (var item in mapController.PathElements)
+        [Inject]
+        MapController mapController;
+
+        public List<Transform> waypoints = new List<Transform>();
+        private void Start()
         {
-            waypoints.Add(item.transform);  
-        } 
-    }
-
-    public Transform GetFirstPoint()
-    {
-        return waypoints[0];
-    }
-
-    public Transform GetNextPoint(Transform currentPoint)
-    {
-        int currentIndex = waypoints.IndexOf(currentPoint);
-        if (currentIndex < waypoints.Count - 1)
-        {
-            return waypoints[currentIndex + 1];
+            foreach (var item in mapController.PathElements)
+            {
+                waypoints.Add(item.transform);
+            }
         }
-        else
-        {
-            return null;
-        }
-    }
 
+        public Transform GetFirstPoint()
+        {
+            return waypoints[0];
+        }
+
+        public Transform GetNextPoint(Transform currentPoint)
+        {
+            int currentIndex = waypoints.IndexOf(currentPoint);
+            if (currentIndex < waypoints.Count - 1)
+            {
+                return waypoints[currentIndex + 1];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+    }
 }

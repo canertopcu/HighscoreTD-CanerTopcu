@@ -1,24 +1,24 @@
 using Assets.Scripts.ScriptableObjects;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-
-public class MainTowerHPBarUIController : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    [Inject]
-    GameDataSO gameData;
-     
-    public Image hpBarImage;
-
-    private void Update()
+    public class MainTowerHPBarUIController : MonoBehaviour
     {
-        SetHPBarValue((float)gameData.mainTowerHealth / gameData.mainTowerMaxHP);
-    }
+        [Inject]
+        GameDataSO gameData;
 
-    public void SetHPBarValue(float value)
-    {
-        hpBarImage.fillAmount = value;
+        public Image hpBarImage;
+
+        private void Update()
+        {
+            SetHPBarValue((float)gameData.mainTowerHealth / gameData.mainTowerMaxHP);
+        }
+
+        public void SetHPBarValue(float value)
+        {
+            hpBarImage.fillAmount = value;
+        }
     }
 }

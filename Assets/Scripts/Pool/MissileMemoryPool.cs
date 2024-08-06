@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Assets.Scripts.Ammo;
+using System.Reflection;
 using Zenject; 
 
 namespace Assets.Scripts.Pool

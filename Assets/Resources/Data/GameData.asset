@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5460667924276ce46b26d4409e157a7d, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  filledTurretTowerSlots: 0600000000000000
-  filledMortarTowerSlots: 05000000
-  mineSetCount: 5
-  turretSetCount: 2
-  mortarSetCount: 1
+  filledTurretTowerSlots: 
+  filledMortarTowerSlots: 
+  mineSetCount: 0
+  turretSetCount: 0
+  mortarSetCount: 0
   activeMineSlots: 
-  emptyTowerSlots: 010000000200000003000000040000000700000008000000090000000a0000000b000000
-  playerGold: 1251
-  playerScore: 2555
+  emptyTowerSlots: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
+  playerGold: 200
+  playerScore: 0
   mainTowerHealth: 100
   mainTowerMaxHP: 100
-  gameLevel: 1
-  elapsedTime: 99.43347
-  incrementTimer: 60
+  gameLevel: 0
+  elapsedTime: 0
+  incrementTimer: 5

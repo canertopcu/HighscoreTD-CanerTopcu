@@ -6,9 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace Assets.Scripts
-{
-
+namespace Assets.Scripts.UI
+{ 
     public class TowerButton : MonoBehaviour
     {
         public TowerType towerType;
@@ -30,7 +29,7 @@ namespace Assets.Scripts
             eventTrigger = GetComponent<EventTrigger>();
             var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
             entry.callback.AddListener((data) => { OnPointerDown(); });
-            eventTrigger.triggers.Add(entry); 
+            eventTrigger.triggers.Add(entry);
 
             UpdateCost();
         }
@@ -50,7 +49,7 @@ namespace Assets.Scripts
         private void OnPointerDown()
         {
             Debug.Log(towerType + " Clicked");
-            towerPlacementManager.StartPlacingTower(towerType, cost,UpdateCost);
+            towerPlacementManager.StartPlacingTower(towerType, cost, UpdateCost);
         }
 
         public void UpdateCost()

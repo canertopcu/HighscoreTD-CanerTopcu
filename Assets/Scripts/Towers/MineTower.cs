@@ -1,10 +1,11 @@
-﻿using Assets.Scripts.ScriptableObjects;
+﻿using Assets.Scripts.Enemy;
+using Assets.Scripts.ScriptableObjects;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using Zenject;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Towers
 {
     public class MineTower : Tower
     {

@@ -1,10 +1,11 @@
-﻿using Assets.Scripts.ScriptableObjects;
+﻿using Assets.Scripts.Enemy;
+using Assets.Scripts.ScriptableObjects;
 using DG.Tweening;
 using System;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Ammo
 {
     public class Bullet : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
     {

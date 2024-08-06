@@ -1,8 +1,9 @@
-﻿using Assets.Scripts.ScriptableObjects;
+﻿using Assets.Scripts.Map;
+using Assets.Scripts.ScriptableObjects;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Towers
 {
     public class Tower : MonoBehaviour
     {

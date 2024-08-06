@@ -1,10 +1,11 @@
 ﻿using Assets.Scripts.Core.Signals;
+using Assets.Scripts.Enemy;
 using Assets.Scripts.Pool;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Towers
 {
     public class TurretTower : Tower
     {
