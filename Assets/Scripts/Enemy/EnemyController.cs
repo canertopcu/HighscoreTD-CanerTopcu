@@ -12,9 +12,9 @@ namespace Assets.Scripts.Enemy
     public class EnemyController : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
     {
         IMemoryPool _pool;
-        
-        private GameDataSO _gameData; 
-        private EnemySO _enemyData;
+
+        private GameDataSO _gameData;
+        [SerializeField] private EnemySO _enemyData;
 
         private WaypointManager _waypointManager;
         private bool isStarted = false;

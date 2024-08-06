@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Enemy;
-using Assets.Scripts.ScriptableObjects;
 using DG.Tweening;
 using System;
 using UnityEngine;
@@ -12,9 +11,8 @@ namespace Assets.Scripts.Ammo
         IMemoryPool _pool;
         private GameObject _explosion;
         public float duration = 1f;
-        private TowerSO _towerData;
-        private GameDataSO _gameData;
         EnemyController _enemy;
+        private float _damageWhenHit;
         public void OnSpawned(IMemoryPool pool)
         {
             _pool = pool;
@@ -31,11 +29,10 @@ namespace Assets.Scripts.Ammo
 
 
         [ContextMenu("Fire")]
-        internal void Fire(EnemyController enemy, TowerSO towerData, GameDataSO gameData)
+        internal void Fire(EnemyController enemy, float damageWhenHit, GameObject explosionPrefab)// TowerSO towerData, GameDataSO gameData)
         {
-            _gameData = gameData;
-            _towerData = towerData;
-            _explosion = towerData.explosionPrefab;
+            _damageWhenHit = damageWhenHit;
+            _explosion = explosionPrefab;
             Vector3 startPos = transform.position;
             _enemy = enemy;
             transform.DOMove(enemy.transform.position, duration)
@@ -45,11 +42,11 @@ namespace Assets.Scripts.Ammo
 
         void OnReachTarget()
         {
-            _enemy.TakeDamage(_towerData.attackDamage * Mathf.Pow(_towerData.attackMultiplier, _gameData.gameLevel));
+            _enemy.TakeDamage(_damageWhenHit);
 
             var exp = Instantiate(_explosion, transform.position, Quaternion.identity);
             Destroy(exp, 0.5f);
-           Dispose();
+            Dispose();
         }
 
 

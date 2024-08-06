@@ -13,10 +13,7 @@ namespace Assets.Scripts.Manager
     public class TowerPlacementManager : MonoBehaviour
     {
         [Inject]
-        private GameDataSO gameData;
-
-        [Inject]
-        private VfxDataSO vfxData;
+        private GameDataSO gameData; 
 
         [Inject]
         MapController mapController;

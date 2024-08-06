@@ -107,9 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30b7e7cf4c5a2f419e335742db1898f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 806f5ba98e25dcc4cb9a73ca27c48750, type: 2}
-  isDanced: 0
-  health: 100
+  _enemyData: {fileID: 11400000, guid: 806f5ba98e25dcc4cb9a73ca27c48750, type: 2}
 --- !u!95 &7400708915195365483
 Animator:
   serializedVersion: 5

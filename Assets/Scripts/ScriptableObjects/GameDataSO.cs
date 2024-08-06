@@ -75,6 +75,7 @@ namespace Assets.Scripts.ScriptableObjects
             mainTowerHealth = mainTowerMaxHP;
             gameLevel = 0;
             elapsedTime = 0;
+            KillCount = 0;
 
         }
     }

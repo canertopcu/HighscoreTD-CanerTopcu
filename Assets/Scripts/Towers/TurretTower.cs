@@ -3,6 +3,7 @@ using Assets.Scripts.Enemy;
 using Assets.Scripts.Pool;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Playables;
 using Zenject;
 
 namespace Assets.Scripts.Towers
@@ -11,14 +12,16 @@ namespace Assets.Scripts.Towers
     {
         public int towerSlotIndex = -1;
         public TowerSO towerData;
-        BulletMemoryPool _bulletPool;
-        public EnemyController target;
-        EnemyManager _enemyManager;
+        private BulletMemoryPool _bulletPool;
+        private EnemyController target;
+        private EnemyManager _enemyManager;
         public Transform muzzle;
-        float timer = 0;
-        SignalBus _signalBus;
-        bool state = true;
-        bool isBoosterActive = false;
+        private float timer = 0;
+        private SignalBus _signalBus;
+        private bool state = true;
+        private bool isBoosterActive = false;
+
+        [SerializeField] private float _damageWhenHit;
         [Inject]
         public void Construct(BulletMemoryPool bulletPool, EnemyManager enemyManager, SignalBus signalBus)
         {
@@ -56,7 +59,8 @@ namespace Assets.Scripts.Towers
             var bullet = _bulletPool.Spawn();
             bullet.transform.position = muzzle.position;
             bullet.transform.rotation = muzzle.rotation;
-            bullet.Fire(target, towerData, gameData);
+            _damageWhenHit = towerData.attackDamage * Mathf.Pow(towerData.attackMultiplier, gameData.gameLevel);
+            bullet.Fire(target, _damageWhenHit,towerData.explosionPrefab);
             timer = towerData.coolDown * (isBoosterActive ? 0.5f : 1);
         }
 
@@ -69,7 +73,7 @@ namespace Assets.Scripts.Towers
         }
         private void Update()
         {
-            if (target != null)
+            if (target != null && state)
             {
                 Vector3 pos1 = target.transform.position;
                 Vector3 pos2 = transform.position;

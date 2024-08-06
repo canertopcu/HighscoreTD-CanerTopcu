@@ -15,11 +15,11 @@ MonoBehaviour:
   enemyName: GiantEnemy
   enemyTypeType: 2
   Hp: 20
-  hpMultiplier: 1.5
+  hpMultiplier: 1.35
   goldReward: 50
-  goldRewardMultiplier: 1.1
-  scoreReward: 100
-  scoreRewardMultiplier: 1.2
+  goldRewardMultiplier: 1.12
+  scoreReward: 10
+  scoreRewardMultiplier: 1.15
   attackDamage: 30
   enemyPrefab: {fileID: 6701129870824827804, guid: 7abc05b42b063354489b2d666dbeda4e,
     type: 3}

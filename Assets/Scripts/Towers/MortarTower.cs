@@ -2,7 +2,6 @@
 using Assets.Scripts.Enemy;
 using Assets.Scripts.Pool;
 using Assets.Scripts.ScriptableObjects;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -20,6 +19,7 @@ namespace Assets.Scripts.Towers
         float timer = 0;
         bool state = true;
         bool isBoosterActive = false;
+        private float _damageWhenHit;
         [Inject]
         public void Construct(MissileMemoryPool missilePool, EnemyManager enemyManager, SignalBus signalBus)
         {
@@ -36,7 +36,7 @@ namespace Assets.Scripts.Towers
 
         private void OnBoosterSignal(BoosterSignal boosterSignal)
         {
-            isBoosterActive= boosterSignal.IsBoosterActive; 
+            isBoosterActive = boosterSignal.IsBoosterActive;
             timer = towerData.coolDown * (isBoosterActive ? 0.5f : 1);
         }
 
@@ -57,8 +57,9 @@ namespace Assets.Scripts.Towers
             var missile = _missilePool.Spawn();
             missile.transform.position = muzzle.position;
             missile.transform.rotation = muzzle.rotation;
-            missile.MoveProjectile(target.transform.position, towerData ,gameData);
-            timer = towerData.coolDown *(isBoosterActive?0.5f:1);
+            _damageWhenHit = towerData.attackDamage * Mathf.Pow(towerData.attackMultiplier, gameData.gameLevel);
+            missile.MoveProjectile(target.transform.position, _damageWhenHit, towerData.explosionPrefab);
+            timer = towerData.coolDown * (isBoosterActive ? 0.5f : 1);
         }
 
 

@@ -16,7 +16,7 @@ namespace Assets.Scripts.Ammo
         private GameObject _explosion;
         private TowerSO _towerData;
         private GameDataSO _gameData;
-
+        private float _damageWhenHit;
         public List<EnemyController> enemies = new List<EnemyController>();
         public void OnSpawned(IMemoryPool pool)
         {
@@ -34,11 +34,10 @@ namespace Assets.Scripts.Ammo
         }
 
         [ContextMenu("Move Projectile")]
-        public void MoveProjectile(Vector3 targetPos, TowerSO towerData, GameDataSO gameData)
+        public void MoveProjectile(Vector3 targetPos, float damageWhenHit, GameObject explosionPrefab)
         {
-            _gameData = gameData;
-            _towerData = towerData;
-            _explosion = towerData.explosionPrefab;
+            _damageWhenHit = damageWhenHit;
+            _explosion = explosionPrefab;
             Vector3 startPos = transform.position;
             Vector3 endPos = targetPos;
             Vector3 controlPoint = (startPos + endPos) / 2;
@@ -61,7 +60,7 @@ namespace Assets.Scripts.Ammo
             {
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                    enemies[i].TakeDamage(_towerData.attackDamage * Mathf.Pow(_towerData.attackMultiplier, _gameData.gameLevel));
+                    enemies[i].TakeDamage(_damageWhenHit);
                 }
             }
 

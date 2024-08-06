@@ -13,14 +13,13 @@ namespace Assets.Scripts.Core.Installers
 {
     public class MainSceneInstaller : MonoInstaller
     {
-        public VfxDataSO vfxDataItem;
-        public GameDataSO gameDataItem;
-
-        public GameObject bulletPrefab;
-        public GameObject missilePrefab;
-        public EnemySO normalEnemy;
-        public EnemySO tinyEnemy;
-        public EnemySO giantEnemy;
+        [SerializeField] private VfxDataSO vfxDataItem;
+        [SerializeField] private GameDataSO gameDataItem; 
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject missilePrefab;
+        [SerializeField] private EnemySO normalEnemy;
+        [SerializeField] private EnemySO tinyEnemy;
+        [SerializeField] private EnemySO giantEnemy;
         public override void InstallBindings()
         { 
             Container.Bind<IGameManager>().To<GameManager>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();

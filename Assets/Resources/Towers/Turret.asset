@@ -18,7 +18,7 @@ MonoBehaviour:
   costMultiplier: 2
   coolDown: 2
   attackDamage: 10
-  attackMultiplier: 1.03
+  attackMultiplier: 1.1
   attackRange: 6
   attackDelay: 0
   isAreaDamage: 0
