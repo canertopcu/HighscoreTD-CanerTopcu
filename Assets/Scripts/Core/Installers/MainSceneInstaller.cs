@@ -12,8 +12,7 @@ using Zenject;
 namespace Assets.Scripts.Core.Installers
 {
     public class MainSceneInstaller : MonoInstaller
-    {
-        [SerializeField] private VfxDataSO vfxDataItem;
+    { 
         [SerializeField] private GameDataSO gameDataItem; 
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject missilePrefab;
@@ -23,6 +22,7 @@ namespace Assets.Scripts.Core.Installers
         public override void InstallBindings()
         { 
             Container.Bind<IGameManager>().To<GameManager>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
+            Container.Bind<FirebaseManager>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
 
             SignalBusInstaller.Install(Container);
 
@@ -34,7 +34,6 @@ namespace Assets.Scripts.Core.Installers
             Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle().NonLazy(); 
 
             Container.Bind<GameDataSO>().FromScriptableObject(gameDataItem).AsSingle();
-            Container.Bind<VfxDataSO>().FromScriptableObject(vfxDataItem).AsSingle();
 
             Container.Bind<EnemyManager>().FromComponentInHierarchy().AsSingle();
             Container.Bind<TowerPlacementManager>().FromComponentInHierarchy().AsSingle();

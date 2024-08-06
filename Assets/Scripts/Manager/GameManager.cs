@@ -1,6 +1,7 @@
 using Assets.Scripts.Core.Interfaces;
 using Assets.Scripts.Core.Signals;
 using Assets.Scripts.ScriptableObjects;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -11,24 +12,28 @@ namespace Assets.Scripts.Manager
         private SignalBus _signalBus;
         private GameDataSO _gameDataSO;
         private UIManager _uiManager;
-
+        private FirebaseManager _firebaseManager;
         public bool isGameStarted = false;
 
         [Inject]
-        private void Construct(SignalBus signalBus, GameDataSO gameDataSO, UIManager uiManager)
+        private void Construct(SignalBus signalBus, GameDataSO gameDataSO, UIManager uiManager, FirebaseManager firebaseManager)
         {
+            _firebaseManager = firebaseManager;
             _signalBus = signalBus;
             _gameDataSO = gameDataSO;
             _uiManager = uiManager;
         }
 
-        private void Start()
+        async void Start()
         {
+
             if (_gameDataSO == null)
             {
                 Debug.LogError("GameDataSO is not injected!");
                 return;
             }
+            await Task.Delay(1000);
+            _firebaseManager.LoadGameData();
 
             if (_uiManager == null)
             {
@@ -39,7 +44,7 @@ namespace Assets.Scripts.Manager
             if (_gameDataSO.mainTowerHealth == 0)
             {
                 _gameDataSO.ResetElements();
-            }
+            } 
         }
 
         public void StartGame()
@@ -91,6 +96,31 @@ namespace Assets.Scripts.Manager
                 _gameDataSO.gameLevel = calculatedLevel;
                 _signalBus.Fire(new LevelSignal(_gameDataSO.gameLevel));
             }
+        }
+        void OnApplicationQuit()
+        {
+            SaveGameData();
+        }
+
+        void OnApplicationPause(bool pauseStatus)
+        {
+            if (pauseStatus)
+            {
+                SaveGameData();
+            }
+        }
+
+        void OnApplicationFocus(bool hasFocus)
+        {
+            if (!hasFocus)
+            {
+                SaveGameData();
+            }
+        }
+
+        private void SaveGameData()
+        {
+            _firebaseManager.SaveGameData();
         }
     }
 }

@@ -3,18 +3,17 @@ using UnityEngine;
 
 namespace Assets.Scripts.ScriptableObjects
 {
-
     [CreateAssetMenu(fileName = "GameData", menuName = "GameData")]
     public class GameDataSO : ScriptableObject
     {
-        public List<int> filledTurretTowerSlots = new();
-        public List<int> filledMortarTowerSlots = new();
+        public List<int> filledTurretTowerSlots = new List<int>();
+        public List<int> filledMortarTowerSlots = new List<int>();
         public int mineSetCount = 0;
         public int turretSetCount = 0;
         public int mortarSetCount = 0;
 
-        public List<int> activeMineSlots;
-        public List<int> emptyTowerSlots;
+        public List<int> activeMineSlots = new List<int>();
+        public List<int> emptyTowerSlots = new List<int>();
         public int playerGold;
         public int playerScore;
         public int mainTowerHealth = 100;
@@ -23,12 +22,13 @@ namespace Assets.Scripts.ScriptableObjects
         public float elapsedTime = 0;
         public float incrementTimer = 60;
 
-        public int KillCount { get; private set; }
+        public int KillCount = 0;
 
         public void AddKillCount()
         {
             KillCount++;
         }
+
         public void HitDamageMainTower(int damage)
         {
             if (mainTowerHealth - damage > 0)
@@ -53,13 +53,13 @@ namespace Assets.Scripts.ScriptableObjects
 
         public void AddScore(int score, float multiply)
         {
-            playerScore += (int)(score * Mathf.Pow(multiply, gameLevel)); ;
+            playerScore += (int)(score * Mathf.Pow(multiply, gameLevel));
         }
 
         [ContextMenu("ResetElements")]
         public void ResetElements()
         {
-            playerGold = 200;
+            playerGold = 300;
             playerScore = 0;
             filledMortarTowerSlots.Clear();
             filledTurretTowerSlots.Clear();
@@ -76,7 +76,6 @@ namespace Assets.Scripts.ScriptableObjects
             gameLevel = 0;
             elapsedTime = 0;
             KillCount = 0;
-
         }
     }
 }

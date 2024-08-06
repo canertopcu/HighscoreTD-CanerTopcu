@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "933097643556",
+    "firebase_url": "https://towerdefence-ed16a-default-rtdb.firebaseio.com",
+    "project_id": "towerdefence-ed16a",
+    "storage_bucket": "towerdefence-ed16a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933097643556:android:4729fac846099b4c7c02b1",
+        "android_client_info": {
+          "package_name": "com.canertopcu.highscoretowerdefence"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDijaz4itEHU7EY9xbfhW--zDxI3AZHAmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

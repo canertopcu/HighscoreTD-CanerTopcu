@@ -53,7 +53,7 @@ namespace Assets.Scripts.Manager
             isPlacing = true;
         }
 
-        private void Start()
+        public void LoadOldScene()
         {
             if (gameData.mortarSetCount > 0)
             {

@@ -19,10 +19,11 @@ MonoBehaviour:
   mortarSetCount: 0
   activeMineSlots: 
   emptyTowerSlots: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
-  playerGold: 200
+  playerGold: 300
   playerScore: 0
   mainTowerHealth: 100
   mainTowerMaxHP: 100
   gameLevel: 0
   elapsedTime: 0
-  incrementTimer: 5
+  incrementTimer: 60
+  KillCount: 0
