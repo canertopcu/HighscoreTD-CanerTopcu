@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: GiantEnemy
   enemyTypeType: 2
   Hp: 20
-  hpMultiplier: 1.2
+  hpMultiplier: 1.5
   goldReward: 50
   goldRewardMultiplier: 1.1
   scoreReward: 100

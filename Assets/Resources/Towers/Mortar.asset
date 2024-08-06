@@ -15,8 +15,8 @@ MonoBehaviour:
   towerName: Mortar
   towerType: 1
   baseCost: 100
-  costMultiplier: 1.5
-  coolDown: 3
+  costMultiplier: 3
+  coolDown: 5
   attackDamage: 10
   attackMultiplier: 1.03
   attackRange: 10
